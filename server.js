@@ -1,6 +1,7 @@
 import express, {json} from "express";
 import mongoose from "mongoose";
-import Book from "./Book.js";
+import router from "./router.js"
+
 
 mongoose.set('strictQuery', false)
 
@@ -14,16 +15,7 @@ app.get("/", (req, res) => {
     res.send("<h1>Learning Backend</h1>")
 })
 
-app.get("/books", async (req, res) => {
-    const getAllBooks =  await Book.find();
-    res.status(200).send(getAllBooks)
-})
-
-app.post('/books', async (req, res) => {
-    const newBook = await Book.create(req.body);
-    res.json(newBook);
-
-})
+app.use("/", router)
 
 const startApp = async () => {
     try {
