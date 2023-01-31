@@ -1,12 +1,16 @@
-import express, {json} from "express";
+import express from "express";
 import mongoose from "mongoose";
-import router from "./router.js"
-
+import router from "./router.js";
+import fileUpload from "express-fileupload";
+import cors from "cors";
 
 mongoose.set('strictQuery', false)
 
 const app = express();
 app.use(express.json());
+app.use(fileUpload()) /** middleware - связующее программное обеспечение, 
+                        которое помогает приложению и серверу обмениваться друг с другом запросами */
+app.use(cors())
 
 const PORT = 3005;
 const DB_URL = "mongodb+srv://akrabinelly:5454@cluster0.3mwt3bw.mongodb.net/?retryWrites=true&w=majority"
